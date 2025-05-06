@@ -19,7 +19,7 @@ fun parseTimeline(json: JSONObject): VisualCrossingResponse {
             windSpeed = d.getDouble("windspeed"),
             pressure = d.getDouble("pressure"),
             description = d.getString("description"),
-            icon = d.optString("icon", null)
+            icon = d.optString("icon")
         )
     }
     return VisualCrossingResponse(
