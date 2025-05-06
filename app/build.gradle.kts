@@ -1,3 +1,6 @@
+import java.util.Properties
+import kotlin.apply
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +9,7 @@ plugins {
 
 android {
     namespace = "org.wahid.instabugweatherapp"
+    namespace = "org.wahid.instabugweatherapp.data.repository"
     compileSdk = 35
 
     defaultConfig {
@@ -18,6 +22,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val secrets = Properties().apply {
+        File(rootDir, "secretes.properties")
+            .takeIf { it.exists() }
+            ?.inputStream()?.use { load(it) }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,6 +35,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL",secrets.getProperty("BASE-URL"))
+            buildConfigField("String", "API_KEY", secrets.getProperty("API-KEY"))
+        }
+        debug {
+            buildConfigField("String", "BASE_URL",secrets.getProperty("BASE-URL"))
+            buildConfigField("String", "API_KEY", secrets.getProperty("API-KEY"))
         }
     }
     compileOptions {
@@ -36,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
