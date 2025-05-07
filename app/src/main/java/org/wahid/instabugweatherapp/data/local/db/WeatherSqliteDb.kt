@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.wahid.instabugweatherapp.data.local.db.dao.WeatherDao
+import org.wahid.instabugweatherapp.utils.AppContainer
 
 class WeatherSqliteDb(context: Context) :
     SQLiteOpenHelper(context, databaseName, null, databaseVersion) {
@@ -60,5 +61,5 @@ class WeatherSqliteDb(context: Context) :
 
 
 
-    fun getDao() = WeatherDao(this)
+    fun getDao() = WeatherDao(AppContainer.getDatabase())
 }
