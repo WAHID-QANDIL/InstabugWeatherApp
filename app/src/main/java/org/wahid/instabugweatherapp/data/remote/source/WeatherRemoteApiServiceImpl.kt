@@ -33,7 +33,7 @@ class WeatherRemoteApiServiceImpl() : WeatherRemoteApiService {
             return url.toString()
         }
 
-        AppExecutors.diskIO.execute {
+        AppExecutors.networkIO.execute {
             val url = prepareUrl()
             var conn: HttpURLConnection? = null
             try {
