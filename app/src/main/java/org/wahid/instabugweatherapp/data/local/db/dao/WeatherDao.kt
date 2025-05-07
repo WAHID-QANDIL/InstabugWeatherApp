@@ -28,9 +28,10 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
                     }
                     insert(WeatherSqliteDb.TABLE_NAME, null, cv)
                 }
-            } finally {
-                db.close()
+            }catch (e: Exception){
+                throw e
             }
+
         }
     }
 
@@ -65,8 +66,37 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
             }
 
         }
-        db.close()
         return list
+
+    }
+    fun getFirst(): WeatherDbEntity{
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            WeatherSqliteDb.TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "${WeatherSqliteDb.COL_DATE} ASC"
+        )
+        var item: WeatherDbEntity? = null
+        cursor.use {
+                item = WeatherDbEntity(
+                date            = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_DATE)),
+                temp            = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMP)),
+                tempMax         = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMAX)),
+                tempMin         = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMIN)),
+                humidity        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
+                precip          = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
+                windSpeed       = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
+                pressure        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
+                address         = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_ADDRESS)),
+                description     = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_DESC)),
+                lastUpdate      = it.getLong(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_LAST_UPDATE))
+            )
+        }
+        return item!!
 
     }
 
