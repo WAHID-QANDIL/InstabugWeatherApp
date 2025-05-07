@@ -8,6 +8,7 @@ import java.util.concurrent.Executors
 object AppExecutors {
 
     val diskIO: Executor = Executors.newFixedThreadPool(2)
+    val networkIO: Executor = Executors.newSingleThreadExecutor()
 
     val mainThread: Handler = Handler(Looper.getMainLooper())
 //    val parserThread: ExecutorService = Executors.newSingleThreadExecutor()
