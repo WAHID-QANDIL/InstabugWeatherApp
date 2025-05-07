@@ -10,13 +10,23 @@ import androidx.core.content.edit
 class SharedPrefs(context: Context) {
     private val prefs = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
-    fun getAll(): Map<String, *> = prefs.all
+
+    fun getBool(key: String) = prefs.getBoolean(key, false)
+    fun getLong(key: String) = prefs.getLong(key, 0L)
+
     @SuppressLint("CommitPrefEdits")
-    fun save(initLaunch: Boolean, cacheTimeOut: Long) {
+    fun putBoolean(initLaunch: Boolean) {
+
+        prefs.edit() {
+            putBoolean(INIT_LAUNCH_KEY, initLaunch)
+        }
+
+
+    }
+    fun putLong(cacheTimeOut: Long) {
 
         prefs.edit() {
             putLong(CACHE_TIME_OUT_KEY, cacheTimeOut)
-            putBoolean(INIT_LAUNCH_KEY, initLaunch)
         }
 
 
