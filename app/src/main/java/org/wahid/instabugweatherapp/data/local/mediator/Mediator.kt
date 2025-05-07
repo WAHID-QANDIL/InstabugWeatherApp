@@ -1,7 +1,9 @@
 package org.wahid.instabugweatherapp.data.local.mediator
 
+import android.util.Log
 import org.wahid.instabugweatherapp.data.local.db.SharedPrefs
 import org.wahid.instabugweatherapp.data.local.db.WeatherSqliteDb
+import org.wahid.instabugweatherapp.data.local.db.dao.WeatherDao
 import org.wahid.instabugweatherapp.data.local.db.model.WeatherDbEntity
 import org.wahid.instabugweatherapp.data.model.VisualCrossingResponseDto
 import org.wahid.instabugweatherapp.data.remote.source.WeatherRemoteApiServiceImpl
@@ -9,55 +11,79 @@ import org.wahid.instabugweatherapp.utils.AppExecutors
 import org.wahid.instabugweatherapp.utils.Callback
 import org.wahid.instabugweatherapp.utils.Constant.INIT_LAUNCH_KEY
 import org.wahid.instabugweatherapp.utils.Constant.CACHE_TIME_OUT_KEY
-import kotlin.time.Duration.Companion.hours
+import java.util.concurrent.TimeUnit
 
 class Mediator(
-    val apiServiceImpl: WeatherRemoteApiServiceImpl,
+    private val apiServiceImpl: WeatherRemoteApiServiceImpl,
     db: WeatherSqliteDb,
-    val prefs: SharedPrefs,
-) {
-    val dbDao = db.getDao()
-    val isFirstLaunch: Boolean = prefs.getAll()[INIT_LAUNCH_KEY] as Boolean
-    val cacheTimeOut: Long = prefs.getAll()[CACHE_TIME_OUT_KEY] as Long
+    private val prefs: SharedPrefs,
+    private val dbDao: WeatherDao = db.getDao(),
 
-    fun load(
+    ) {
+    private fun isFirstLaunch() = prefs.getBool(INIT_LAUNCH_KEY)
+    private fun lastFetchAt() = prefs.getLong(CACHE_TIME_OUT_KEY)
+
+    fun loadFirst(
+        callback: Callback<WeatherDbEntity>,
+    ) {
+        AppExecutors.diskIO.execute {
+            try {
+                val cachedData = dbDao.getFirst()
+                AppExecutors.mainThread.post { callback.onSuccess(cachedData) }
+
+
+            } catch (e: Exception) {
+                AppExecutors.mainThread.post { callback.onError(e) }
+            }
+        }
+
+    }
+
+    fun loadFetchAll(
         lat: Double,
         lon: Double,
-        callback: Callback<WeatherDbEntity>
+        callback: Callback<List<WeatherDbEntity>>,
     ) {
 
-        val currentTime = System.currentTimeMillis()
+        val now = System.currentTimeMillis()
+        val elapsed = now - lastFetchAt()
+
         var cachedData: List<WeatherDbEntity>? = null
-        AppExecutors.diskIO.execute {
-            if (isFirstLaunch || cacheTimeOut.plus(1).hours <= currentTime.hours) {
+        AppExecutors.networkIO.execute {
+            if (isFirstLaunch() || elapsed >= TimeUnit.HOURS.toMillis(1)) {
+                Log.d("Fetch", "loadFetchAll: ")
                 apiServiceImpl.fetchWeatherJson(lat = lat, lon = lon, callback = object :
                     Callback<VisualCrossingResponseDto> {
                     override fun onSuccess(result: VisualCrossingResponseDto) {
-                        val res = result.days?.map {
+                        val res = result.days.orEmpty().map {
                             it.toDb()
                         }
-                        res?.let {
+                        AppExecutors.diskIO.execute {
                             dbDao.replace(days = res)
                             cachedData = res
-                            prefs.save(false, cacheTimeOut = currentTime)
+                            prefs.putLong(cacheTimeOut = now)
+                            prefs.putBoolean(false)
+                            AppExecutors.mainThread.post { callback.onSuccess(res) }
                         }
                     }
 
                     override fun onError(error: Throwable) {
-                        callback.onError(error = error)
+                        AppExecutors.mainThread.post { callback.onError(error = error) }
                     }
                 })
 
-            }
-            else {
+            } else {
+                AppExecutors.diskIO.execute {
+                    Log.d("Load", "loadFetchAll: ")
+                    try {
+                        val cachedData = dbDao.load()
+                        AppExecutors.mainThread.post { callback.onSuccess(cachedData) }
 
-                try {
-                    cachedData = dbDao.load()
-
-                } catch (
-                    e: Exception,
-                ) {
-                    callback.onError(error = e)
+                    } catch (
+                        e: Exception,
+                    ) {
+                        AppExecutors.mainThread.post { callback.onError(error = e) }
+                    }
                 }
 
             }
