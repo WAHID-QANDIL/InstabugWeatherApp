@@ -1,9 +1,5 @@
 package org.wahid.instabugweatherapp.data.model
 
-import android.location.Geocoder
-import org.wahid.instabugweatherapp.Application
-import java.util.Locale
-
 @Suppress("DEPRECATION")
 data class VisualCrossingResponseDto(
     val queryCost:          Int?,
