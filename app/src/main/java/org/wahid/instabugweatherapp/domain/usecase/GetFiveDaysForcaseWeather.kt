@@ -1,6 +1,5 @@
 package org.wahid.instabugweatherapp.domain.usecase
 
-import org.wahid.instabugweatherapp.data.repository.WeatherRepositoryImpl
 import org.wahid.instabugweatherapp.domain.model.DomainWeatherDay
 import org.wahid.instabugweatherapp.utils.AppContainer
 import org.wahid.instabugweatherapp.utils.Callback
