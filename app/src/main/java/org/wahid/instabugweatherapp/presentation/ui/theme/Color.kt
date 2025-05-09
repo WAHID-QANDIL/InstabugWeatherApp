@@ -1,4 +1,4 @@
-package org.wahid.instabugweatherapp.ui.theme
+package org.wahid.instabugweatherapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
