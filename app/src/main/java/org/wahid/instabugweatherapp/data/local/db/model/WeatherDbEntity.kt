@@ -12,9 +12,9 @@ data class WeatherDbEntity (
     val precip:         Double,
     val windSpeed:      Double,
     val pressure:       Double,
-    val address:        String,
     val description:    String,
     val lastUpdate:     Long,
+    val timeZone:       String
 ){
     fun toDomain(): DomainWeatherDay{
         return DomainWeatherDay(
@@ -23,9 +23,13 @@ data class WeatherDbEntity (
             maxTemp = tempMax,
             minTemp = tempMin,
             description = description,
-            address = address,
-            timezone = description,
-            pressure = pressure
+            timezone = timeZone,
+            pressure = pressure,
+            windSpeed = windSpeed,
+            precip = precip,
+            humidity = humidity,
+            lastUpdate = lastUpdate,
+            address = timeZone.substringAfter("/")
         )
     }
 }

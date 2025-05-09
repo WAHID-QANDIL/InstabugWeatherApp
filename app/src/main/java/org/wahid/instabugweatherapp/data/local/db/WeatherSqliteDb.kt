@@ -9,8 +9,8 @@ import org.wahid.instabugweatherapp.utils.AppContainer
 class WeatherSqliteDb(context: Context) :
     SQLiteOpenHelper(context, databaseName, null, databaseVersion) {
     companion object {
-        val databaseName = "wather.db"
-        val databaseVersion = 1
+        const val databaseName = "wather.db"
+        const val databaseVersion = 4
 
         const val TABLE_NAME        = "weather_table"
         const val COL_DATE          = "date"
@@ -21,9 +21,10 @@ class WeatherSqliteDb(context: Context) :
         const val COL_PRECIP        = "precip"
         const val COL_WIND          = "wind_speed"
         const val COL_PRESS         = "pressure"
-        const val COL_ADDRESS       = "address"
+//        const val COL_ADDRESS       = "address"
         const val COL_DESC          = "description"
         const val COL_LAST_UPDATE   = "last_update"
+        const val COL_TIME_ZONE     = "time_zone"
 
 
     }
@@ -40,7 +41,7 @@ class WeatherSqliteDb(context: Context) :
                 $COL_PRECIP         REAL,
                 $COL_WIND           REAL,
                 $COL_PRESS          REAL,
-                $COL_ADDRESS        TEXT,
+                $COL_TIME_ZONE      TEXT,
                 $COL_DESC           TEXT,
                 $COL_LAST_UPDATE    REAL
                 )

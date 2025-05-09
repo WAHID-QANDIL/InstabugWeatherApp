@@ -15,8 +15,6 @@ interface WeatherRepository {
 
     @Throws(Exception::class)
     fun getFiveDayForecast(
-        lat: Double,
-        lon: Double,
         unit: WeatherUnits = WeatherUnits.metric,
         callback: Callback<List<DomainWeatherDay>>,
     )

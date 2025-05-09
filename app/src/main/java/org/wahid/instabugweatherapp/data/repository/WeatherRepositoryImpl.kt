@@ -1,5 +1,6 @@
 package org.wahid.instabugweatherapp.data.repository
 
+import android.util.Log
 import org.wahid.instabugweatherapp.data.local.db.model.WeatherDbEntity
 import org.wahid.instabugweatherapp.data.local.mediator.Mediator
 import org.wahid.instabugweatherapp.domain.model.DomainWeatherDay
@@ -18,26 +19,27 @@ class WeatherRepositoryImpl(
         unit: WeatherUnits,
         callback: Callback<DomainWeatherDay>,
     ) {
-            mediator.loadFirst(callback = object : Callback<WeatherDbEntity>{
+        mediator.loadCurrentWeather(
+            lat = lat, lon = lon,
+            callback = object : Callback<WeatherDbEntity> {
                 override fun onSuccess(result: WeatherDbEntity) {
                     callback.onSuccess(result = result.toDomain())
                 }
+
                 override fun onError(error: Throwable) {
                     callback.onError(error)
                 }
-            })
+            }
+        )
 
     }
 
     override fun getFiveDayForecast(
-        lat: Double,
-        lon: Double,
         unit: WeatherUnits,
         callback: Callback<List<DomainWeatherDay>>,
     ) {
+        Log.d("getFiveDayForecast", "getFiveDayForecast: ${Thread.currentThread()}")
         mediator.loadFetchAll(
-            lat = lat,
-            lon = lon,
             callback = object : Callback<List<WeatherDbEntity>> {
                 override fun onSuccess(result: List<WeatherDbEntity>) {
                     val res = result.map {
