@@ -1,6 +1,10 @@
 package org.wahid.instabugweatherapp.data.remote.source
 
+import android.util.Log
 import org.json.JSONObject
+import org.wahid.instabugweatherapp.data.custom_exceptions.WeatherRemoteCustomException.AuthenticationException
+import org.wahid.instabugweatherapp.data.custom_exceptions.WeatherRemoteCustomException.NotFoundException
+import org.wahid.instabugweatherapp.data.custom_exceptions.WeatherRemoteCustomException.ServerErrorException
 import org.wahid.instabugweatherapp.data.model.VisualCrossingResponseDto
 import org.wahid.instabugweatherapp.data.repository.BuildConfig
 import org.wahid.instabugweatherapp.utils.AppExecutors
@@ -42,13 +46,28 @@ class WeatherRemoteApiServiceImpl() : WeatherRemoteApiService {
                     connectTimeout = 10_000
                     readTimeout = 10_000
                 }
-                val rawJson = JSONObject(conn.inputStream.bufferedReader().use { it.readText() })
+
+                val code = conn.responseCode
+                val body = (if (code >= 400) conn.errorStream else conn.inputStream)
+                    ?.bufferedReader()?.use { it.readText() } ?: ""
+
+                when(code){
+                    in 200..299 -> body
+                    401 -> throw AuthenticationException()
+                    404 -> throw NotFoundException()
+                    in 500..599 -> throw ServerErrorException()
+                }
+
+                val rawJson = JSONObject(body)
                 val visualCrossingResponseDto = parseTimeline(rawJson)
                 callback.onSuccess(visualCrossingResponseDto)
             } catch (
                 e: Exception
             ) {
                 callback.onError(e)
+                Log.d("HttpURLConnection", "fetchWeatherJson: ${e.message}")
+            }finally {
+                conn?.disconnect()
             }
 
 
