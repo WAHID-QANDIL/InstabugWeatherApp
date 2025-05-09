@@ -22,35 +22,19 @@ class Mediator(
     ) {
     private fun isFirstLaunch() = prefs.getBool(INIT_LAUNCH_KEY)
     private fun lastFetchAt() = prefs.getLong(CACHE_TIME_OUT_KEY)
+    val now = System.currentTimeMillis()
+    val elapsed = now - lastFetchAt()
+    val cacheDuration = TimeUnit.HOURS.toMillis(1)
+    val shouldFetch = isFirstLaunch() || (elapsed >= cacheDuration)
 
-    fun loadFirst(
-        callback: Callback<WeatherDbEntity>,
-    ) {
-        AppExecutors.diskIO.execute {
-            try {
-                val cachedData = dbDao.getFirst()
-                AppExecutors.mainThread.post { callback.onSuccess(cachedData) }
-
-
-            } catch (e: Exception) {
-                AppExecutors.mainThread.post { callback.onError(e) }
-            }
-        }
-
-    }
-
-    fun loadFetchAll(
+    fun loadCurrentWeather(
         lat: Double,
         lon: Double,
-        callback: Callback<List<WeatherDbEntity>>,
+        callback: Callback<WeatherDbEntity>,
     ) {
-
-        val now = System.currentTimeMillis()
-        val elapsed = now - lastFetchAt()
-
-        var cachedData: List<WeatherDbEntity>? = null
-        AppExecutors.networkIO.execute {
-            if (isFirstLaunch() || elapsed >= TimeUnit.HOURS.toMillis(1)) {
+        if (shouldFetch) {
+            Log.d("shouldFetch", "loadCurrentWeather: $shouldFetch")
+            AppExecutors.networkIO.execute {
                 Log.d("Fetch", "loadFetchAll: ")
                 apiServiceImpl.fetchWeatherJson(lat = lat, lon = lon, callback = object :
                     Callback<VisualCrossingResponseDto> {
@@ -60,10 +44,12 @@ class Mediator(
                         }
                         AppExecutors.diskIO.execute {
                             dbDao.replace(days = res)
-                            cachedData = res
                             prefs.putLong(cacheTimeOut = now)
                             prefs.putBoolean(false)
-                            AppExecutors.mainThread.post { callback.onSuccess(res) }
+                            AppExecutors.mainThread.post {
+                                if (res.isNotEmpty()) callback.onSuccess(res.first())
+                                else callback.onError(IllegalStateException("No data"))
+                            }
                         }
                     }
 
@@ -72,21 +58,45 @@ class Mediator(
                     }
                 })
 
-            } else {
-                AppExecutors.diskIO.execute {
-                    Log.d("Load", "loadFetchAll: ")
-                    try {
-                        val cachedData = dbDao.load()
-                        AppExecutors.mainThread.post { callback.onSuccess(cachedData) }
-
-                    } catch (
-                        e: Exception,
-                    ) {
-                        AppExecutors.mainThread.post { callback.onError(error = e) }
-                    }
-                }
-
             }
+        } else {
+
+            AppExecutors.diskIO.execute {
+                try {
+                    val cachedData = dbDao.getFirst()
+                    Log.d("cachedData", "loadCurrentWeather: $cachedData")
+                    AppExecutors.mainThread.post { callback.onSuccess(cachedData) }
+
+
+                } catch (e: Exception) {
+                    AppExecutors.mainThread.post { callback.onError(e) }
+                }
+            }
+        }
+    }
+
+    fun loadFetchAll(
+        callback: Callback<List<WeatherDbEntity>>,
+    ) {
+
+
+        AppExecutors.networkIO.execute {
+            Log.d("networkIO", "loadFetchAll: ${Thread.currentThread()}")
+
+            AppExecutors.diskIO.execute {
+                Log.d("Load", "loadFetchAll: ${Thread.currentThread()}")
+                try {
+                    val cachedData = dbDao.loadFiveForcast()
+                    AppExecutors.mainThread.post { callback.onSuccess(cachedData) }
+
+                } catch (
+                    e: Exception,
+                ) {
+                    AppExecutors.mainThread.post { callback.onError(error = e) }
+                }
+            }
+
+
         }
     }
 }
