@@ -28,7 +28,7 @@ class HomeViewModel(
     }
 
     fun onPermissionDenied() {
-        _uiState.value = HomeUiState.Error("Location permission denied")
+        _uiState.value = HomeUiState.Error(Exception("Location Permission Denied"))
     }
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
@@ -50,7 +50,7 @@ class HomeViewModel(
                 }
 
                 override fun onError(error: Throwable) {
-                    _uiState.postValue(HomeUiState.Error(error.message.toString()))
+                    _uiState.postValue(HomeUiState.Error(error))
                 }
 
             }

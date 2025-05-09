@@ -26,6 +26,7 @@ import org.wahid.instabugweatherapp.data.repository.R
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import org.wahid.instabugweatherapp.data.custom_exceptions.ErrorMapper
 import org.wahid.instabugweatherapp.presentation.ui.screens.core.ErrorCard
 import org.wahid.instabugweatherapp.presentation.ui.screens.core.WeatherDayCard
 
@@ -94,7 +95,8 @@ fun ForcaseScreenContent(
                         .padding(it),
                     contentAlignment = Alignment.Center
                 ) {
-                    ErrorCard(message = uiState.message, onRetry = onRetry)
+                    val errorMessageResId = ErrorMapper.mapToMessageRes(uiState.error)
+                    ErrorCard(message = stringResource(errorMessageResId), onRetry = onRetry)
                 }
             }
 

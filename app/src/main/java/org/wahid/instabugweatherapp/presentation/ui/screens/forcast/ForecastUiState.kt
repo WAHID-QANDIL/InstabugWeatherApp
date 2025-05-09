@@ -5,5 +5,5 @@ import org.wahid.instabugweatherapp.domain.model.DomainWeatherDay
 sealed class ForecastUiState{
     data object Loading: ForecastUiState()
     data class Success(val result: List<DomainWeatherDay>): ForecastUiState()
-    data class Error(val message: String): ForecastUiState()
+    data class Error(val error: Throwable): ForecastUiState()
 }

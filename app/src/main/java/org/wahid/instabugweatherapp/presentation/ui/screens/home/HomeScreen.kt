@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import org.wahid.instabugweatherapp.data.custom_exceptions.ErrorMapper
 import org.wahid.instabugweatherapp.data.repository.R
 import org.wahid.instabugweatherapp.presentation.navigation.Screen
 import org.wahid.instabugweatherapp.presentation.ui.screens.core.ErrorCard
@@ -178,7 +179,8 @@ fun HomeScreenContent(
                                 modifier = modifier.padding(pd),
                                 contentAlignment = Alignment.Center
                             ) {
-                                ErrorCard(message = homeUiState.message, onRetry = onRefresh)
+                                val errMessage = ErrorMapper.mapToMessageRes(homeUiState.error)
+                                ErrorCard(message = stringResource(errMessage), onRetry = onRefresh)
                             }
                         }
 

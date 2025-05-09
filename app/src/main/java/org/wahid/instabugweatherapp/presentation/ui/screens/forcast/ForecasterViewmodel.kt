@@ -23,7 +23,7 @@ class ForecastScreenViewModel(
                 }
 
                 override fun onError(error: Throwable) {
-                    _uiState.postValue(ForecastUiState.Error(error.message.toString()))
+                    _uiState.postValue(ForecastUiState.Error(error))
                 }
 
             }
