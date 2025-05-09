@@ -27,10 +27,6 @@ class HomeViewModel(
         }
     }
 
-    fun onPermissionDenied() {
-        _uiState.value = HomeUiState.Error(Exception("Location Permission Denied"))
-    }
-
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     fun refresh() {
         Log.d("refresh", "refresh: refreshed")

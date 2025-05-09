@@ -36,7 +36,7 @@ fun ErrorCard(
             containerColor = MaterialTheme.colorScheme.errorContainer
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        onClick = { onRetry?.invoke() }  // clickable if retry is provided :contentReference[oaicite:1]{index=1}
+        onClick = { onRetry?.invoke() }
     ) {
         Column(
             modifier = Modifier
