@@ -11,8 +11,9 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
         val db = dbHelper.writableDatabase
         db.transaction() {
             try {
+            //Cache only five forcast days
                 delete(WeatherSqliteDb.TABLE_NAME, null, null)
-                days.forEach { day ->
+                days.take(5).forEach { day ->
                     val cv = ContentValues().apply {
                         put(WeatherSqliteDb.COL_DATE,           day.date)
                         put(WeatherSqliteDb.COL_TEMP,           day.temp)
@@ -24,7 +25,7 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
                         put(WeatherSqliteDb.COL_PRESS,          day.pressure)
                         put(WeatherSqliteDb.COL_DESC,           day.description)
                         put(WeatherSqliteDb.COL_LAST_UPDATE,    day.lastUpdate)
-                        put(WeatherSqliteDb.COL_ADDRESS,        day.address)
+                        put(WeatherSqliteDb.COL_TIME_ZONE,      day.timeZone)
                     }
                     insert(WeatherSqliteDb.TABLE_NAME, null, cv)
                 }
@@ -35,7 +36,7 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
         }
     }
 
-    fun load(): List<WeatherDbEntity> {
+    fun loadFiveForcast(): List<WeatherDbEntity> {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             WeatherSqliteDb.TABLE_NAME,
@@ -44,7 +45,7 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
             null,
             null,
             null,
-            "${WeatherSqliteDb.COL_DATE} ASC"
+            "${WeatherSqliteDb.COL_DATE} ASC","5"
         )
         val list = mutableListOf<WeatherDbEntity>()
 
@@ -56,10 +57,10 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
                     tempMax         = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMAX)),
                     tempMin         = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMIN)),
                     humidity        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                    precip          = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                    windSpeed       = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                    pressure        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                    address         = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_ADDRESS)),
+                    precip          = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_PRECIP)),
+                    windSpeed       = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_WIND)),
+                    pressure        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_PRESS)),
+                    timeZone        = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TIME_ZONE)),
                     description     = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_DESC)),
                     lastUpdate      = it.getLong(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_LAST_UPDATE))
                 )
@@ -69,7 +70,7 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
         return list
 
     }
-    fun getFirst(): WeatherDbEntity{
+    fun getFirst(): WeatherDbEntity {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             WeatherSqliteDb.TABLE_NAME,
@@ -78,26 +79,42 @@ class WeatherDao(private val dbHelper: WeatherSqliteDb) {
             null,
             null,
             null,
-            "${WeatherSqliteDb.COL_DATE} ASC"
+            "${WeatherSqliteDb.COL_DATE} ASC",
+            "1"
         )
-        var item: WeatherDbEntity? = null
-        cursor.use {
-                item = WeatherDbEntity(
-                date            = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_DATE)),
-                temp            = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMP)),
-                tempMax         = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMAX)),
-                tempMin         = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMIN)),
-                humidity        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                precip          = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                windSpeed       = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                pressure        = it.getDouble(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID)),
-                address         = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_ADDRESS)),
-                description     = it.getString(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_DESC)),
-                lastUpdate      = it.getLong(it.getColumnIndexOrThrow(WeatherSqliteDb.COL_LAST_UPDATE))
+        cursor.use { c ->
+
+            if (!c.moveToFirst()) {
+                throw NoSuchElementException("No weather data available")
+            }
+
+            val date        = c.getString(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_DATE))
+            val temp        = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMP))
+            val tempMax     = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMAX))
+            val tempMin     = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_TEMPMIN))
+            val humidity    = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID))
+            val precip      = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID))
+            val windSpeed   = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID))
+            val pressure    = c.getDouble(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_HUMID))
+            val timeZone     = c.getString(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_TIME_ZONE))
+            val description = c.getString(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_DESC))
+            val lastUpdate  = c.getLong(c.getColumnIndexOrThrow(WeatherSqliteDb.COL_LAST_UPDATE))
+
+            return WeatherDbEntity(
+                date         = date,
+                temp         = temp,
+                tempMax      = tempMax,
+                tempMin      = tempMin,
+                humidity     = humidity,
+                precip       = precip,
+                windSpeed    = windSpeed,
+                pressure     = pressure,
+//                address      = address,
+                timeZone     = timeZone,
+                description  = description,
+                lastUpdate   = lastUpdate
             )
         }
-        return item!!
-
     }
 
 
