@@ -9,4 +9,8 @@ data class DomainWeatherDay(
     val address:        String,
     val timezone:       String,
     val pressure:       Double,
+    val humidity:       Double,
+    val precip:         Double,
+    val windSpeed:      Double,
+    val lastUpdate:     Long,
 )

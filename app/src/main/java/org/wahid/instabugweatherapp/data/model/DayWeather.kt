@@ -13,6 +13,7 @@ data class DayWeather(
     val windSpeed:      Double,
     val pressure:       Double,
     val description:    String,
+    val timeZone:       String,
 //    val address:        String, all days belongs to the same location/address
 ){
     fun toDb(): WeatherDbEntity{
@@ -26,7 +27,7 @@ data class DayWeather(
             windSpeed   = windSpeed,
             pressure    = pressure,
             description = description,
-            address     = "UNKNOWN",
+            timeZone    = timeZone,
             lastUpdate  = System.currentTimeMillis()
         )
     }
