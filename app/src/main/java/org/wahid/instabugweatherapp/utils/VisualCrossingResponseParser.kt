@@ -19,6 +19,7 @@ fun parseTimeline(json: JSONObject): VisualCrossingResponseDto {
             windSpeed   = d.getDouble("windspeed"),
             pressure    = d.getDouble("pressure"),
             description = d.getString("description"),
+            timeZone    = json.getString("timezone")
 
         )
     }
