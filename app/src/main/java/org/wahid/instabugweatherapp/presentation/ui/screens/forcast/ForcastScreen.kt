@@ -53,6 +53,7 @@ fun ForcaseScreenContent(
     onRetry: () -> Unit,
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(R.string.instabug_weather)) },

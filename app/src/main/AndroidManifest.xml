@@ -20,7 +20,7 @@
         android:theme="@style/Theme.InstabugWeatherApp"
         tools:targetApi="31">
         <activity
-            android:name="org.wahid.instabugweatherapp.ui.MainActivity"
+            android:name="org.wahid.instabugweatherapp.presentation.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.InstabugWeatherApp">
             <intent-filter>
