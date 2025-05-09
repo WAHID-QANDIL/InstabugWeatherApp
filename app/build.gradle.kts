@@ -66,6 +66,22 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    //Kotlinx serialization
+//    implementation(libs.kotlinx.serialization)
+    // After searching about kotlinx.serialization I found it considered as third-party lib, so I will parse the screens routes explicitly with Android JSONObj().
+
+    //Compose navigation
+    implementation(libs.androidx.navigation.compose)
+    //LiveData
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+    implementation (libs.androidx.runtime.livedata)
+    //
+    implementation (libs.activity.ktx)
+    //Material is not considered as 3rd party
+    implementation(libs.androidx.material)
+
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
