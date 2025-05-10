@@ -10,31 +10,21 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 
 # App Techs,Tools
 <ol>
-<li>**Clean Architecture**</li>
-<li>**Material3**</li>
-<li>**Compose**</li>
-<li>**Kotlin**</li>
-<li>**SQLite Database (""I'm NOT using Room because it considered to be 3rd party lib")**</li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li>Clean Architecture**</li>
+<li>Material3</li>
+<li>Compose</li>
+<li>Kotlin</li>
+<li>SQLite Database (""I'm NOT using Room because it considered to be 3rd party lib")</li>
+<li>SharedPreferences(""I can go with DataStore for more optimization and read/write speed")</li>
+<li>Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")</li>
+<li>Single Activity</li>
+<li>ViewModels</li>
+<li>CallBacks</li>
+<li>Threading (""No Coroutines usage because it considered to be 3rd party lib")</li>
+<li>LiveData</li>
+<li>HttpUrlConnection</li>
+<li>Compose Navigation</li>
 </ol>
-
-
-
-
-**SharedPreferences(""I can go with DataStore for more optimization and read/write speed")**
-**ViewModels**
-**Single Activity**
-**Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")**
-**10- Location API**
-**11- CallBacks**
-**12- Threading (""No Coroutines usage because it considered to be 3rd party lib")**
-**13- LiveData**
-**14- HttpUrlConnection**
-**15- Compose Navigation**
 
 # App Screen Shots
 ![Screenshot 2025-05-10 042119.png](images/Screenshot%202025-05-10%20042119.png)
