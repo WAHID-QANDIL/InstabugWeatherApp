@@ -1,11 +1,12 @@
 ![img.png](images/img.png)
 
 # Application Behaviour
-First launch: The app request a location permission to get the current device lat,lon information
-If it not granted for some reason, the application did NOT run and request to open settings and enable location permission for the app
+## First launch:
+The app request a location permission to get the current device `lat`,`lon` information
+If it not granted for some reason, the application did **NOT** run and request to open settings and enable location permission for the app
 If it granted the app make an API call to https://www.visualcrossing.com/ to get weather, then parse json and extract 5 forecast days to cache them into database
 The API-calls are optimized by restrict the number of calls every 1H, so, if the time cache out did NOT expired, no new API calls even the user make pull-refresh, and get cached data instead.
-This optimization needed if we run a large-scale app to make sure our backend din not fail because of the number of requests, and also, the weather here won't change in an hour.
+**This optimization needed `if we run a large-scale app to make sure our backend din not fail because` of the number of requests, and also, the weather here won't change in an hour.**
 
 # App Techs,Tools
 **1-  Clean Architecture**
