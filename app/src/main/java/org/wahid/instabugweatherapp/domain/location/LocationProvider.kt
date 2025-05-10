@@ -27,7 +27,7 @@ class LocationProvider(
         val provider = when {
             locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
             locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
-            else -> throw IllegalArgumentException("No location provider enabled")
+            else -> throw IllegalArgumentException(Exception("The GPS provider is not enabled"))
         }
         stopListening()
         locationListener = object : LocationListener {
