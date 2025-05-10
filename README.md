@@ -44,4 +44,5 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 ![Screenshot 2025-05-10 050911.png](images/Screenshot%202025-05-10%20050911.png)
 
 Considerations:
+# **This crash has FIXED**
 The app suppose the GPS provider is enabled, if it doesn't, the app will throw an exception and crash
