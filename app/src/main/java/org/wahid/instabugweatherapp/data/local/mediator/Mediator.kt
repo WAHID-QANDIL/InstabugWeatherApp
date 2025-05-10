@@ -13,6 +13,11 @@ import org.wahid.instabugweatherapp.utils.Constant.INIT_LAUNCH_KEY
 import org.wahid.instabugweatherapp.utils.Constant.CACHE_TIME_OUT_KEY
 import java.util.concurrent.TimeUnit
 
+/*
+* This mediator is to decide from where we load our data
+* If the cache time ou is expired, fetch from API, else load from DB
+* The mediator act like a bridge, and treating the Database as Single source of truth SST
+* */
 class Mediator(
     private val apiServiceImpl: WeatherRemoteApiServiceImpl,
     db: WeatherSqliteDb,
@@ -46,10 +51,10 @@ class Mediator(
                             dbDao.replace(days = res)
                             prefs.putLong(cacheTimeOut = now)
                             prefs.putBoolean(false)
-                            AppExecutors.mainThread.post {
-                                if (res.isNotEmpty()) callback.onSuccess(res.first())
-                                else callback.onError(IllegalStateException("No data"))
-                            }
+                        }
+                        AppExecutors.mainThread.post {
+                            if (res.isNotEmpty()) callback.onSuccess(res.first())
+                            else callback.onError(IllegalStateException("No data"))
                         }
                     }
 

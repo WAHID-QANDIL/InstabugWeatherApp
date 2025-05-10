@@ -7,7 +7,8 @@ import org.wahid.instabugweatherapp.data.custom_exceptions.WeatherRemoteCustomEx
 import org.wahid.instabugweatherapp.data.repository.R
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-
+/*
+* This mapper wrap the exception message to user-friendly message, to be displayed of the UI*/
 object ErrorMapper {
     @StringRes
     fun mapToMessageRes(e: Throwable): Int = when (e) {
