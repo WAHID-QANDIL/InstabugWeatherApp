@@ -19,7 +19,7 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 <li>Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")</li>
 <li>Single Activity</li>
 <li>ViewModels</li>
-<li>CallBacks</li>
+<li>CallBacks("Not AsyncTask because it's deprecated"") </li>
 <li>Threading (""No Coroutines usage because it considered to be 3rd party lib")</li>
 <li>LiveData</li>
 <li>HttpUrlConnection</li>
