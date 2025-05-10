@@ -1,18 +1,17 @@
 package org.wahid.instabugweatherapp.data.custom_exceptions
 
-import org.wahid.instabugweatherapp.data.repository.R
 import java.io.IOException
 
-sealed class WeatherRemoteCustomException(message: String? = null) : IOException(message){
+sealed class WeatherRemoteCustomException() : IOException(){
     class AuthenticationException :
-        WeatherRemoteCustomException(R.string.error_unauthorized.toString())
+        WeatherRemoteCustomException()
 
     class NotFoundException :
-        WeatherRemoteCustomException(R.string.error_not_found.toString())
+        WeatherRemoteCustomException()
 
     class ServerErrorException :
-        WeatherRemoteCustomException(R.string.error_server.toString())
+        WeatherRemoteCustomException()
 
     class NetworkException :
-        WeatherRemoteCustomException(R.string.error_network.toString())
+        WeatherRemoteCustomException()
 }

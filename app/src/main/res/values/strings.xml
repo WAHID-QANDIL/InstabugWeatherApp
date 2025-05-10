@@ -4,4 +4,10 @@
     <string name="back">Back</string>
     <string name="show_more">SHOW MORE</string>
     <string name="show_less">SHOW LESS</string>
+    <string name="error_unauthorized">Please log in to continue.</string>
+    <string name="error_not_found">Requested data was not found.</string>
+    <string name="error_server">Server is currently unavailable.</string>
+    <string name="error_timeout">Request timed out. Check your connection.</string>
+    <string name="error_network">Unable to connect. Please try again.</string>
+    <string name="error_unknown">An unexpected error occurred.</string>
 </resources>

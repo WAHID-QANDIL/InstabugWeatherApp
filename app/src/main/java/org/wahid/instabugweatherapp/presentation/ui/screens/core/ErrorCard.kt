@@ -39,7 +39,7 @@ fun ErrorCard(
         onClick = { onRetry?.invoke() }
     ) {
         Column(
-            modifier = Modifier
+            modifier = Modifier.fillMaxWidth()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
