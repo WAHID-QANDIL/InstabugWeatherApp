@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,24 +20,30 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.compose.rememberNavController
 import org.wahid.instabugweatherapp.presentation.navigation.AppNav
 import org.wahid.instabugweatherapp.presentation.ui.screens.home.HomeViewModel
+import java.lang.IllegalArgumentException
 
 class MainActivity : ComponentActivity() {
     private val homeVM: HomeViewModel by viewModels<HomeViewModel>()
 
     @SuppressLint("MissingPermission")
-    private  var locationPermissionLauncher: ActivityResultLauncher<String> =  registerForActivityResult(
-        RequestPermission()
-    ) { granted ->
-        if (granted) {
-            homeVM.onPermissionGranted()
-        } else {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-               requestLocationPermission(this)
+    private var locationPermissionLauncher: ActivityResultLauncher<String> =
+        registerForActivityResult(
+            RequestPermission()
+        ) { granted ->
+            if (granted) {
+                try {
+                    homeVM.onPermissionGranted()
+                }catch (e: IllegalArgumentException){
+                    showSettingsDialogGPSProvider()
+                }
             } else {
-                showSettingsDialog()
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    requestLocationPermission(this)
+                } else {
+                    showSettingsDialog()
+                }
             }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +68,11 @@ class MainActivity : ComponentActivity() {
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED -> {
-                homeVM.onPermissionGranted()
+                try {
+                    homeVM.onPermissionGranted()
+                }catch (e: IllegalArgumentException){
+                    showSettingsDialogGPSProvider()
+                }
             }
 
             shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
@@ -95,10 +106,24 @@ class MainActivity : ComponentActivity() {
             .setTitle("Permission Permanently Denied")
             .setMessage("Please enable location in app settings to use this feature.")
             .setPositiveButton("Settings") { _, _ ->
-                Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.fromParts("package", packageName, null)
                     startActivity(this)
                 }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+    private fun showSettingsDialogGPSProvider() {
+        AlertDialog.Builder(this)
+            .setTitle("GPS provider is not enabled")
+            .setMessage("Please enable location provider from settings to use this app.")
+            .setPositiveButton("Settings") { _, _ ->
+                startActivity(Intent(
+                    Settings.ACTION_LOCATION_SOURCE_SETTINGS
+                ).setFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK
+                ))
             }
             .setNegativeButton("Cancel", null)
             .show()
