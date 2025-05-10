@@ -10,6 +10,7 @@ import org.wahid.instabugweatherapp.domain.location.LocationProvider
 import org.wahid.instabugweatherapp.domain.model.DomainWeatherDay
 import org.wahid.instabugweatherapp.domain.usecase.GetCurrentWeatherUseCase
 import org.wahid.instabugweatherapp.utils.Callback
+import java.lang.IllegalArgumentException
 
 class HomeViewModel(
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase = GetCurrentWeatherUseCase(),
@@ -21,10 +22,15 @@ class HomeViewModel(
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     fun onPermissionGranted() {
-        tracker.startListening { loc ->
-            Log.d("onPermissionGranted", "onPermissionGranted:${loc.latitude} ## ${loc.longitude} ")
-            getCurrentWeather(loc.latitude, loc.longitude)
+        try {
+            tracker.startListening { loc ->
+                Log.d("onPermissionGranted", "onPermissionGranted:${loc.latitude} ## ${loc.longitude} ")
+                getCurrentWeather(loc.latitude, loc.longitude)
+            }
+        }catch (e: IllegalArgumentException){
+            throw e
         }
+
     }
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])

@@ -2,11 +2,13 @@ package org.wahid.instabugweatherapp.domain.location
 
 import android.Manifest.permission
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import androidx.annotation.RequiresPermission
+import androidx.core.content.ContextCompat
 import org.wahid.instabugweatherapp.utils.AppContainer
 import org.wahid.instabugweatherapp.utils.AppExecutors
 
@@ -24,18 +26,34 @@ class LocationProvider(
         onLocation: (Location) -> Unit,
     ): Boolean {
 
-        val provider = when {
+
+        val provider =  when {
             locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
             locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
-            else -> throw IllegalArgumentException(Exception("The GPS provider is not enabled"))
+            else -> throw IllegalArgumentException("The GPS provider is not enabled")
         }
+
+        val fineGranted = ContextCompat.checkSelfPermission(
+            AppContainer.appContext,
+            permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+        val coarseGranted = ContextCompat.checkSelfPermission(
+            AppContainer.appContext,
+            permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+        if (!(fineGranted || coarseGranted)) {
+            // Caller must request permissions first
+            return false
+        }
+
         stopListening()
         locationListener = object : LocationListener {
             override fun onLocationChanged(loc: Location) = onLocation(loc)
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
             override fun onProviderEnabled(provider: String) {}
             override fun onProviderDisabled(provider: String) {
-                throw Exception("The GPS provider is not enabled")
+                stopListening()
             }
         }
 
