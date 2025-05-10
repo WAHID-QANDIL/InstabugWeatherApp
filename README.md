@@ -39,6 +39,7 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 ![Screenshot 2025-05-10 042516.png](images/Screenshot%202025-05-10%20042516.png)
 ![Screenshot 2025-05-10 042539.png](images/Screenshot%202025-05-10%20042539.png)
 ![Screenshot 2025-05-10 044217.png](images/Screenshot%202025-05-10%20044217.png)
+![Screenshot 2025-05-10 125417.png](images/Screenshot%202025-05-10%20125417.png)
 ![Screenshot 2025-05-10 053519.png](images/Screenshot%202025-05-10%20053519.png)
 ![Screenshot 2025-05-10 050911.png](images/Screenshot%202025-05-10%20050911.png)
 
