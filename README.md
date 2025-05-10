@@ -9,21 +9,32 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 **This optimization needed `if we run a large-scale app to make sure our backend din not fail because` of the number of requests, and also, the weather here won't change in an hour.**
 
 # App Techs,Tools
-## **1-  Clean Architecture**
-## **2-  Material3**
-## **3-  Compose**
-## **4-  Kotlin**
-## **5-  SQLite Database (""I'm NOT using Room because it considered to be 3rd party lib")**
-## **6-  SharedPreferences(""I can go with DataStore for more optimization and read/write speed")**
-## **7-  ViewModels**
-## **8-  Single Activity**
-## **9-  Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")**
-## **10- Location API**
-## **11- CallBacks**
-## **12- Threading (""No Coroutines usage because it considered to be 3rd party lib")**
-## **13- LiveData**
-## **14- HttpUrlConnection**
-## **15- Compose Navigation**
+<ol>
+<li>**Clean Architecture**</li>
+<li>**Material3**</li>
+<li>**Compose**</li>
+<li>**Kotlin**</li>
+<li>**SQLite Database (""I'm NOT using Room because it considered to be 3rd party lib")**</li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+
+
+
+**SharedPreferences(""I can go with DataStore for more optimization and read/write speed")**
+**ViewModels**
+**Single Activity**
+**Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")**
+**10- Location API**
+**11- CallBacks**
+**12- Threading (""No Coroutines usage because it considered to be 3rd party lib")**
+**13- LiveData**
+**14- HttpUrlConnection**
+**15- Compose Navigation**
 
 # App Screen Shots
 ![Screenshot 2025-05-10 042119.png](images/Screenshot%202025-05-10%20042119.png)
