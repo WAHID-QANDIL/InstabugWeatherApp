@@ -1,37 +1,39 @@
-![img.png](img.png)
-#App Screen Shots
-![Screenshot 2025-05-10 042119.png](Screenshot%202025-05-10%20042119.png)
-![Screenshot 2025-05-10 042206.png](Screenshot%202025-05-10%20042206.png)
-![Screenshot 2025-05-10 042220.png](Screenshot%202025-05-10%20042220.png)
-![Screenshot 2025-05-10 042232.png](Screenshot%202025-05-10%20042232.png)
-![Screenshot 2025-05-10 042328.png](Screenshot%202025-05-10%20042328.png)
-![Screenshot 2025-05-10 042341.png](Screenshot%202025-05-10%20042341.png)
-![Screenshot 2025-05-10 042402.png](Screenshot%202025-05-10%20042402.png)
-![Screenshot 2025-05-10 042441.png](Screenshot%202025-05-10%20042441.png)
-![Screenshot 2025-05-10 042516.png](Screenshot%202025-05-10%20042516.png)
-![Screenshot 2025-05-10 042539.png](Screenshot%202025-05-10%20042539.png)
-![Screenshot 2025-05-10 044217.png](Screenshot%202025-05-10%20044217.png)
-![Screenshot 2025-05-10 050911.png](Screenshot%202025-05-10%20050911.png)
-##Application Behaviour
+![img.png](images/img.png)
+
+#Application Behaviour
 First launch: The app request a location permission to get the current device lat,lon information
 If it not granted for some reason, the application did NOT run and request to open settings and enable location permission for the app
 If it granted the app make an API call to https://www.visualcrossing.com/ to get weather, then parse json and extract 5 forecast days to cache them into database
 The API-calls are optimized by restrict the number of calls every 1H, so, if the time cache out did NOT expired, no new API calls even the user make pull-refresh, and get cached data instead.
 This optimization needed if we run a large-scale app to make sure our backend din not fail because of the number of requests, and also, the weather here won't change in an hour.
 
-##App Techs,Tools
-1-  Clean Architecture
-2-  Material3
-3-  Compose
-4-  Kotlin
-5-  SQLite Database (""I'm NOT using Room because it considered to be 3rd party lib")
-6-  SharedPreferences(""I can go with DataStore for more optimization and read/write speed")
-7-  ViewModels
-8-  Single Activity
-9-  Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")
-10- Location API
-11- CallBacks
-12- Threading (""No Coroutines usage because it considered to be 3rd party lib")
-13- LiveData
-14- HttpUrlConnection
-15- Compose Navigation
+#App Techs,Tools
+**1-  Clean Architecture**
+**2-  Material3**
+**3-  Compose**
+**4-  Kotlin**
+**5-  SQLite Database (""I'm NOT using Room because it considered to be 3rd party lib")**
+**6-  SharedPreferences(""I can go with DataStore for more optimization and read/write speed")**
+**7-  ViewModels**
+**8-  Single Activity**
+**9-  Manual DI (""I'm NOT using Dagger/Dagger-Hilt because all of then considered to be 3rd party libs")**
+**10- Location API**
+**11- CallBacks**
+**12- Threading (""No Coroutines usage because it considered to be 3rd party lib")**
+**13- LiveData**
+**14- HttpUrlConnection**
+**15- Compose Navigation**
+
+#App Screen Shots
+![Screenshot 2025-05-10 042119.png](images/Screenshot%202025-05-10%20042119.png)
+![Screenshot 2025-05-10 042206.png](images/Screenshot%202025-05-10%20042206.png)
+![Screenshot 2025-05-10 042220.png](images/Screenshot%202025-05-10%20042220.png)
+![Screenshot 2025-05-10 042232.png](images/Screenshot%202025-05-10%20042232.png)
+![Screenshot 2025-05-10 042328.png](images/Screenshot%202025-05-10%20042328.png)
+![Screenshot 2025-05-10 042341.png](images/Screenshot%202025-05-10%20042341.png)
+![Screenshot 2025-05-10 042402.png](images/Screenshot%202025-05-10%20042402.png)
+![Screenshot 2025-05-10 042441.png](images/Screenshot%202025-05-10%20042441.png)
+![Screenshot 2025-05-10 042516.png](images/Screenshot%202025-05-10%20042516.png)
+![Screenshot 2025-05-10 042539.png](images/Screenshot%202025-05-10%20042539.png)
+![Screenshot 2025-05-10 044217.png](images/Screenshot%202025-05-10%20044217.png)
+![Screenshot 2025-05-10 050911.png](images/Screenshot%202025-05-10%20050911.png)
