@@ -24,6 +24,7 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 <li>LiveData</li>
 <li>HttpUrlConnection</li>
 <li>Compose Navigation</li>
+<li>Junit</li>
 </ol>
 
 # App Screen Shots
