@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 * The mediator act like a bridge, and treating the Database as Single source of truth SST
 * */
 class Mediator(
-    private val apiServiceImpl: WeatherRemoteApiServiceImpl,
+    private val apiServiceImpl: WeatherRemoteApiService,
     db: WeatherSqliteDb,
     private val prefs: SharedPrefs,
     private val dbDao: WeatherDao = db.getDao(),
