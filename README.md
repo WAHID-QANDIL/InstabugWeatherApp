@@ -36,72 +36,47 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 
 <table>
   <tr>
-    <td><img src="images/Screenshot%202025-05-10%20042119.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20042206.png" alt="Image 2" width="200"/></td>
-  </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
+    <td><img src="images/Screenshot%202025-05-10%20042119.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042206.png" alt="Image 2" width="400"/></td>
   </tr>
 
    <tr>
-    <td><img src="images/Screenshot%202025-05-10%20042220.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20042232.png" alt="Image 2" width="200"/></td>
-  </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
+    <td><img src="images/Screenshot%202025-05-10%20042220.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042232.png" alt="Image 2" width="400"/></td>
   </tr>
 
 
    <tr>
-    <td><img src="images/Screenshot%202025-05-10%20042328.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20042341.png.png" alt="Image 2" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042328.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042341.png.png" alt="Image 2" width="400"/></td>
   </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
-  </tr>
+
 
 
    <tr>
-    <td><img src="images/Screenshot%202025-05-10%20042402.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20125417.png" alt="Image 2" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042402.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20125417.png" alt="Image 2" width="400"/></td>
   </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
-  </tr>
+
 
 
    <tr>
-    <td><img src="images/Screenshot%202025-05-10%20042441.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20042516.png" alt="Image 2" width="200"/></td>
-  </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
+    <td><img src="images/Screenshot%202025-05-10%20042441.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042516.png" alt="Image 2" width="400"/></td>
   </tr>
 
    <tr>
-    <td><img src="images/Screenshot%202025-05-10%20042539.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20044217.png" alt="Image 2" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042539.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20044217.png" alt="Image 2" width="400"/></td>
   </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
-  </tr>
+
 
 
    <tr>
-    <td><img src="images/Screenshot%202025-05-10%20053519.png" alt="Image 1" width="200"/></td>
-    <td><img src="images/Screenshot%202025-05-10%20050911.png" alt="Image 2" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20053519.png" alt="Image 1" width="400"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20050911.png" alt="Image 2" width="400"/></td>
   </tr>
-  <tr>
-    <td>Description 1</td>
-    <td>Description 2</td>
-  </tr>
-  
+
   
 </table>
 
