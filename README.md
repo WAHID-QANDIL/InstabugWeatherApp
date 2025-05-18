@@ -31,33 +31,79 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 <li>Junit</li>
 </ol>
 
+# App Screen Shots
+
 
 <table>
   <tr>
     <td><img src="images/Screenshot%202025-05-10%20042119.png" alt="Image 1" width="200"/></td>
-    <td><img src="https://example.com/image2.png" alt="Image 2" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042206.png" alt="Image 2" width="200"/></td>
   </tr>
   <tr>
     <td>Description 1</td>
     <td>Description 2</td>
   </tr>
-</table>
 
-# App Screen Shots
-![Screenshot 2025-05-10 042119.png](images/Screenshot%202025-05-10%20042119.png)
-![Screenshot 2025-05-10 042206.png](images/Screenshot%202025-05-10%20042206.png)
-![Screenshot 2025-05-10 042220.png](images/Screenshot%202025-05-10%20042220.png)
-![Screenshot 2025-05-10 042232.png](images/Screenshot%202025-05-10%20042232.png)
-![Screenshot 2025-05-10 042328.png](images/Screenshot%202025-05-10%20042328.png)
-![Screenshot 2025-05-10 042341.png](images/Screenshot%202025-05-10%20042341.png)
-![Screenshot 2025-05-10 042402.png](images/Screenshot%202025-05-10%20042402.png)
-![Screenshot 2025-05-10 125417.png](images/Screenshot%202025-05-10%20125417.png)
-![Screenshot 2025-05-10 042441.png](images/Screenshot%202025-05-10%20042441.png)
-![Screenshot 2025-05-10 042516.png](images/Screenshot%202025-05-10%20042516.png)
-![Screenshot 2025-05-10 042539.png](images/Screenshot%202025-05-10%20042539.png)
-![Screenshot 2025-05-10 044217.png](images/Screenshot%202025-05-10%20044217.png)
-![Screenshot 2025-05-10 053519.png](images/Screenshot%202025-05-10%20053519.png)
-![Screenshot 2025-05-10 050911.png](images/Screenshot%202025-05-10%20050911.png)
+   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042220.png" alt="Image 1" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042232.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+
+
+   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042328.png" alt="Image 1" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042341.png.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+
+
+   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042402.png" alt="Image 1" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20125417.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+
+
+   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042441.png" alt="Image 1" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20042516.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+
+   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042539.png" alt="Image 1" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20044217.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+
+
+   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20053519.png" alt="Image 1" width="200"/></td>
+    <td><img src="images/Screenshot%202025-05-10%20050911.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+  
+  
+</table>
 
 Considerations:
 # **This crash has FIXED**
