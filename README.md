@@ -31,6 +31,18 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 <li>Junit</li>
 </ol>
 
+
+<table>
+  <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042119.png" alt="Image 1" width="200"/></td>
+    <td><img src="https://example.com/image2.png" alt="Image 2" width="200"/></td>
+  </tr>
+  <tr>
+    <td>Description 1</td>
+    <td>Description 2</td>
+  </tr>
+</table>
+
 # App Screen Shots
 ![Screenshot 2025-05-10 042119.png](images/Screenshot%202025-05-10%20042119.png)
 ![Screenshot 2025-05-10 042206.png](images/Screenshot%202025-05-10%20042206.png)
