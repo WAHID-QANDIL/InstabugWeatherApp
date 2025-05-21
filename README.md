@@ -1,6 +1,6 @@
 ![img.png](images/img.png)
 
-# **Note: THIS APP DID NOT PASS THE CHALLENGE**
+# **NOTE: THIS APP DID NOT PASS THE CHALLENGE**
 [Android Internship Task 2025-1.pdf](https://github.com/user-attachments/files/20369903/Android.Internship.Task.2025-1.pdf)
 
 
