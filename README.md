@@ -1,5 +1,8 @@
 ![img.png](images/img.png)
 
+# **Note: THIS APP DID NOT PASS THE CHALLENGE**
+
+
 # Application Behaviour
 ## First launch:
 The app request a location permission to get the current device `lat`,`lon` information
@@ -10,7 +13,6 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
 
 # APK-LINK 
 **https://drive.google.com/file/d/1J2CqjUUKybZMcqZrQXQACFy378KQopca/view?usp=drive_link**
-
 
 # App Techs,Tools
 <ol>
