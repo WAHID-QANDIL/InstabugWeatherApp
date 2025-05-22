@@ -41,7 +41,9 @@ The API-calls are optimized by restrict the number of calls every 1H, so, if the
   <tr >
      <td><img src="images/Screenshot%202025-05-10%20050911.png" alt="Image 2" width="800"/></td>
   </tr>
+  
   <tr>
+    <td><img src="images/Screenshot%202025-05-10%20042119.png" alt="Image 1" width="400"/></td>
     <td><img src="images/Screenshot%202025-05-10%20042119.png" alt="Image 1" width="400"/></td>
    
    
